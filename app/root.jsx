@@ -1,5 +1,6 @@
-import { Meta,Links } from "@remix-run/react";
-import styles from './styles/index.css'
+import { Meta, Links, Outlet } from "@remix-run/react";
+import styles from "./styles/index.css";
+import Header from "./components/header";
 export function meta() {
   return {
     charset: "utf-8",
@@ -8,15 +9,40 @@ export function meta() {
   };
 }
 
-export function links(){
-  return [{
-    rel:'stylesheet',
-    href:styles
-  }]
+export function links() {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://necolas.github.io/normalize.css/8.0.1/normalize.css",
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "true",
+    },
+    {
+      rel: "stylesheet",
+
+      href: "https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap",
+      crossOrigin: "true",
+    },
+    {
+      rel: "stylesheet",
+      href: styles,
+    },
+  ];
 }
 
 export default function App() {
-  return <Document><h1>Hola App</h1></Document>;
+  return (
+    <Document>
+      <Outlet />
+    </Document>
+  );
 }
 
 function Document({ children }) {
@@ -24,9 +50,12 @@ function Document({ children }) {
     <html lang="es">
       <head>
         <Meta />
-        <Links/>
+        <Links />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
