@@ -1,7 +1,15 @@
-import { Meta, Links, Outlet,Scripts,LiveReload } from "@remix-run/react";
+import {
+  Meta,
+  Links,
+  Outlet,
+  Scripts,
+  LiveReload,
+  useCatch,
+  Link
+} from "@remix-run/react";
 import styles from "./styles/index.css";
 import Header from "./components/header";
-import Footer from './components/footer'
+import Footer from "./components/footer";
 export function meta() {
   return {
     charset: "utf-8",
@@ -56,10 +64,36 @@ function Document({ children }) {
       <body>
         <Header />
         {children}
-        <Footer/>
-        <Scripts/>
-        <LiveReload/>
+        <Footer />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
+  );
+}
+
+// Manejo de errores
+
+export function CatchBoundary() {
+  const error = useCatch();
+  return (
+    <Document>
+      <p className="error">
+        {error.status} {error.statusText}{" "}
+      </p>
+      <Link className="error-enlace" to='/'>Volver a la pagina Principal</Link>
+    </Document>
+  );
+}
+
+export function ErrorBoundary({ error }) {
+  return (
+    <Document>
+      <p className="error">
+        {error.status} {error.statusText}{" "}
+      </p>
+      <Link className="error-enlace" to='/'>Volver a la pagina Principal</Link>
+
+    </Document>
   );
 }
