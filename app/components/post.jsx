@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@remix-run/react";
 import {formatearFecha} from '~/utils/helpers';
 export default function Post({ post }) {
-  console.log(post);
+  
   const { contenido, imagen, titulo, url, publishedAt } = post;
   return (
     <article className="post">
