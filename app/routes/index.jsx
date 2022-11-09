@@ -2,17 +2,21 @@ import { useLoaderData } from "@remix-run/react";
 import { getGuitarras } from "~/models/guitarras.server";
 import { getPosts } from "~/models/posts.server";
 import ListadoGuitarra from "~/components/listado-guitarras";
-import stylesGuitarras from '~/styles/guitarras.css';
+import ListadoPosts from "~/components/listado-posts";
+import stylesGuitarras from "~/styles/guitarras.css";
+import stylesPosts from "~/styles/blog.css";
 export function meta() {}
 export function links() {
-
   return [
-
     {
-      rel: 'stylesheet',
-      href:stylesGuitarras
-    }
-  ]
+      rel: "stylesheet",
+      href: stylesGuitarras,
+    },
+    {
+      rel: "stylesheet",
+      href: stylesPosts,
+    },
+  ];
 }
 export async function loader() {
   const [guitarras, posts] = await Promise.all([getGuitarras(), getPosts()]);
@@ -26,6 +30,9 @@ function Index() {
       <main className="contenedor">
         <ListadoGuitarra guitarras={guitarras} />
       </main>
+      <section className="contenedor">
+        <ListadoPosts posts={posts} />
+      </section>
     </>
   );
 }
