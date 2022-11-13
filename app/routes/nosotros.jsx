@@ -1,11 +1,10 @@
 import imagen from "../../public/img/nosotros.jpg";
 import styles from "../styles/nosotros.css";
-
-export function meta(){
+export function meta() {
   return {
-    title:'GuitarLA - Sobre Nosotros',
-    description:'Venta de guitarras, blog de musica'
-  }
+    title: "GuitarLA - Sobre Nosotros",
+    description: "Venta de guitarras, blog de musica",
+  };
 }
 export function links() {
   return [
@@ -14,13 +13,14 @@ export function links() {
       href: styles,
     },
     {
-      rel:'preload',
-      href:imagen,
-      as: 'image'
-    }
+      rel: "preload",
+      href: imagen,
+      as: "image",
+    },
   ];
 }
 function Nosotros() {
+  
   return (
     <main className="contenedor nosotros">
       <h2 className="heading">Nosotros</h2>
@@ -37,7 +37,6 @@ function Nosotros() {
             ut vehicula leo venenatis. Sed efficitur elit a arcu laoreet
             dignissim. Maecenas vehicula dolor non euismod dictum.
           </p>
-          
         </div>
       </div>
     </main>
