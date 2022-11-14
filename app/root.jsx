@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from "react";
 import {
   Meta,
   Links,
@@ -6,7 +6,7 @@ import {
   Scripts,
   LiveReload,
   useCatch,
-  Link
+  Link,
 } from "@remix-run/react";
 import styles from "./styles/index.css";
 import Header from "./components/header";
@@ -48,15 +48,27 @@ export function links() {
 }
 
 export default function App() {
-  const [carrito,setCarrito]=useState([])
-  const agregarCarrito= guitarra=>{
-    setCarrito([...carrito,guitarra])
-  }
+  const [carrito, setCarrito] = useState([]);
+  const agregarCarrito = (guitarra) => {
+    if (carrito.some((guitarraState) => guitarraState.id === guitarra.id)) {
+      const carritoActualizado = carrito.map((guitarraState) => {
+        if (guitarraState.id === guitarra.id) {
+          guitarraState.cantidad = guitarra.cantidad;
+        }
+        return guitarraState;
+      });
+      setCarrito(carritoActualizado);
+    } else {
+      setCarrito([...carrito, guitarra]);
+    }
+  };
   return (
     <Document>
-      <Outlet context={{
-        agregarCarrito
-      }} />
+      <Outlet
+        context={{
+          agregarCarrito,
+        }}
+      />
     </Document>
   );
 }
@@ -88,7 +100,9 @@ export function CatchBoundary() {
       <p className="error">
         {error.status} {error.statusText}{" "}
       </p>
-      <Link className="error-enlace" to='/'>Volver a la pagina Principal</Link>
+      <Link className="error-enlace" to="/">
+        Volver a la pagina Principal
+      </Link>
     </Document>
   );
 }
@@ -99,8 +113,9 @@ export function ErrorBoundary({ error }) {
       <p className="error">
         {error.status} {error.statusText}{" "}
       </p>
-      <Link className="error-enlace" to='/'>Volver a la pagina Principal</Link>
-
+      <Link className="error-enlace" to="/">
+        Volver a la pagina Principal
+      </Link>
     </Document>
   );
 }
