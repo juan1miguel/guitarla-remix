@@ -67,9 +67,15 @@ export default function App() {
       if (guitarraState.id === guitarra.id) {
         guitarraState.cantidad = guitarra.cantidad;
       }
-      return guitarraState
+      return guitarraState;
     });
-    setCarrito(carritoActualizado)
+    setCarrito(carritoActualizado);
+  };
+  const eliminarGuitarra = (id) => {
+    const carritoActualizado = carrito.filter(
+      (guitarraState) => guitarraState.id !== id
+    );
+    setCarrito(carritoActualizado);
   };
   return (
     <Document>
@@ -78,6 +84,7 @@ export default function App() {
           agregarCarrito,
           carrito,
           actualizarCantidad,
+          eliminarGuitarra,
         }}
       />
     </Document>
